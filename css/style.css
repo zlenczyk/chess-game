@@ -1,0 +1,31 @@
+button.btn {
+    height: 40px;
+    width: 150px;
+    border: 1px solid #1e728c;
+    border-radius: 20px;
+    background-color:	rgb(34, 133, 162);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#main {
+    display: flex;
+}
+
+div.inside {
+    display: inline-block;
+}
+
+#inside {
+    width: 600px;
+}
+
+div.btn_vert {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#div_start_restart {
+    margin-top: 70px;
+}

@@ -24,16 +24,12 @@ function onDrop(source, target, piece, newPos, oldPos, orientation) {
     return 'snapback';
   }
   else{
-    console.log('FIGURY BOTA przed biciem');
-    console.log(botFigures);
     playerFigures[target] = playerFigures[source];
     delete playerFigures[source];
     if(target in botFigures){
       delete botFigures[target];
-      console.log('FIGURY BOTA po biciu');
-      console.log(botFigures);
       configCopy.position = Object.assign(botFigures,playerFigures);
-      configCopy.orientation = color;
+      configCopy.orientation = orientation;
       configCopy.draggable = true;
       board = Chessboard('board1', configCopy);
       updateBoard();
@@ -174,10 +170,6 @@ function arrayEquals(a, b) {
 }
 
 function promotePawn(promotionLine, colorSymbol, pawnPosition){
-  console.log('pozycja pionka na linii przemiany');
-  console.log(pawnPosition);
-  console.log('linia przemiany');
-  console.log(promotionLine);
   if(promotionLine.includes(pawnPosition)){
     let pawnColorSymbol = colorSymbol.concat('Q');
     delete configCopy.position;
@@ -197,7 +189,7 @@ function botMove(){
   else{playerColor = 'white';}
   whereMoveAlloved(botFigures, botAllovedMoves, playerColor);
   botMakeMove(botAllovedMoves);
-  updateBoard();
+  //updateBoard();
   config.draggable=true;
   playerAllovedMoves = {};
 }
@@ -213,6 +205,7 @@ function botMakeMove(allovedMoves){
   const key = keys[random];
   let nextMove = key.concat('-');
   nextMove = nextMove.concat(valueOfIndex);
+  botFigures[valueOfIndex] = 
   board.move(nextMove);
   updateBoard();
   if(valueOfIndex in playerFigures){
@@ -222,9 +215,9 @@ function botMakeMove(allovedMoves){
     configCopy.draggable = true;
     board = Chessboard('board1', configCopy);
     updateBoard();
-    if(botFigures[valueOfIndex] === botColorSymbol.concat('P')){
+  }
+  if(botFigures[valueOfIndex] === botColorSymbol.concat('P')){
       promotePawn(botPromotionLine, botColorSymbol, valueOfIndex);
-    }
   }
 }
 
